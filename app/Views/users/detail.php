@@ -1,15 +1,24 @@
 <?= $this->extend('layout/default'); ?>
 <?= $this->section('content'); ?>
-<div class="row mt-4">
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
+    <div class="d-block mb-4 mb-md-0">
+        <h2 class="h4">Detail User : <span class="text-uppercase"><?= esc($userData['user_fullname']); ?></span></h2>
+    </div>
+</div>
+<?php if (session()->getFlashdata('success')) : ?>
+    <div class="alert alert-info" role="alert">
+        <?= session('success'); ?>
+    </div>
+<?php endif; ?>
+<div class="row">
     <div class="col-12 col-xl-8">
         <div class="card card-body border-0 shadow mb-4">
-            <h2 class="h5 mb-4">General information</h2>
             <form>
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <div>
                             <label for="first_name">First Name</label>
-                            <input class="form-control" id="first_name" type="text" value="phpp">
+                            <input class="form-control" id="first_name" type="text" value="<?= esc($userData['user_fullname']); ?>" readonly>
                         </div>
                     </div>
                 </div>
@@ -17,30 +26,29 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input class="form-control" id="phone" type="number" placeholder="+12-345 678 910" required="">
+                            <input class="form-control" id="phone" type="number" value="<?= esc($userData['user_phone_number']); ?>" readonly>
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="gender">Gender</label>
-                        <select class="form-select mb-0" id="gender" aria-label="Gender select example">
-                            <option selected="">Gender</option>
-                            <option value="1">Female</option>
-                            <option value="2">Male</option>
-                        </select>
+                        <input class="form-control" id="phone" type="text" value="<?= esc($userData['user_gender']); ?>" readonly>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 mb-3">
                         <div class="form-group">
                             <label for="address">Address</label>
-                            <textarea name="" class="form-control" id="address" cols="30" rows="10"></textarea>
+                            <textarea name="" class="form-control" id="address" cols="30" rows="10" readonly><?= esc($userData['user_address']); ?></textarea>
                         </div>
                     </div>
                 </div>
-                <div class="mt-3">
-                    <button class="btn btn-gray-800 mt-2 animate-up-2" type="submit">
-                        Save all
-                    </button>
+                <div class="d-flex justify-content-between">
+                    <a href="<?= base_url(); ?>users/<?= $userData['user_username']; ?>/edit" class=" btn btn-secondary mt-2 text-end">
+                        Edit user data
+                    </a>
+                    <a href="<?= base_url(); ?>users" class="btn btn-outline-secondary mt-2">
+                        Back to user list
+                    </a>
                 </div>
             </form>
         </div>

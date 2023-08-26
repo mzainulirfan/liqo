@@ -6,7 +6,7 @@
         <p class="mb-0">List of all registered users.</p>
     </div>
     <div class="btn-toolbar mb-2 mb-md-0">
-        <a href="#" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
+        <a href="<?= base_url(); ?>users/create" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
             <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
             </svg>
@@ -14,7 +14,12 @@
         </a>
     </div>
 </div>
-<div class="col-12 col-xxl-6 mb-4">
+<?php if (session()->getFlashdata('success')) : ?>
+    <div class="alert alert-info" role="alert">
+        <?= session('success'); ?>
+    </div>
+<?php endif; ?>
+<div class="col-12 mb-4">
     <div class="card border-0 shadow">
         <div class="card-header border-bottom d-flex align-items-center justify-content-between">
             <h2 class="fs-5 fw-bold mb-0">Progress track</h2>
@@ -46,7 +51,9 @@
                                 <tr>
                                     <td><?= $i++; ?></td>
                                     <td>
-                                        <?= $user['user_fullname']; ?>
+                                        <a href="<?= base_url(); ?>users/<?= $user['user_username']; ?>" class="text-dark text-uppercase">
+                                            <?= $user['user_fullname']; ?>
+                                        </a>
                                     </td>
                                     <td>
                                         <?= $user['user_phone_number']; ?>
@@ -56,6 +63,12 @@
                                     </td>
                                     <td class="text-end">
                                         <a href="<?= base_url(); ?>users/<?= $user['user_username']; ?>" class="text-info"><i class="bx bx-user"></i>&nbsp;Detail</a>
+                                        <a href="<?= base_url(); ?>users/<?= $user['user_username']; ?>/edit" class="text-info"><i class="bx bx-pencil"></i>&nbsp;Edit</a>
+                                        <form action="<?= base_url(); ?>users/<?= $user['user_id']; ?>" method="post" class="d-inline-flex">
+                                            <?= csrf_field(); ?>
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button class="btn btn-outline-none btn-sm text-danger" type="submit" onclick="return confirm('Apakah yakin data <?= $user['user_fullname']; ?> mau dihapus?')"><i class="bx bx-trash"></i>&nbsp;Delete</button>
+                                        </form>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
