@@ -2,6 +2,9 @@
  <script src="<?= base_url(); ?>src/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
  <script src="<?= base_url(); ?>src/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 
+ <!-- Vanilla JS Datepicker -->
+ <script src="<?= base_url(); ?>src/vendor/vanillajs-datepicker/dist/js/datepicker.min.js"></script>
+
  <!-- Simplebar -->
  <script src="<?= base_url(); ?>src/vendor/simplebar/dist/simplebar.min.js"></script>
 
