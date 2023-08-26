@@ -14,11 +14,27 @@ class Users extends BaseController
     }
     public function index()
     {
+        $cache = \Config\Services::cache();
+
+        // Contoh penggunaan cache
+        if ($userData = $cache->get('userDataCache')) {
+            // Data ditemukan di cache
+            $cachedData = true;
+        } else {
+            // Data tidak ditemukan di cache, ambil dari sumber asli dan simpan ke cache
+            $userData = $this->userModel->findAll();
+            $cache->save('userDataCache', $userData, 30); // Simpan dalam cache selama 1 jam (3600 detik)
+            $cachedData = false;
+        }
+
+        $today = date('Y-m-d');
         $data = [
             'title' => 'Daftar User',
-            'userData' => $this->userModel->findAll()
+            'userData' => $userData,
+            'countAllUser' => $this->userModel->countAllResults(),
+            'countAllUserToday' => $this->userModel->countUserToday($today),
+            'cachedData' => $cachedData,
         ];
-
         return view('users/list', $data);
     }
     public function create()
@@ -60,22 +76,31 @@ class Users extends BaseController
     public function detail($username)
     {
         $userData = $this->userModel->getByUsername($username);
-        // dd($userData);
-        $data = [
-            'title' => 'Detail ' . $userData['user_username'],
-            'userData' => $userData
-        ];
-        return view('users/detail', $data);
+
+        if ($userData) {
+            $data = [
+                'title' => 'Detail ' . $userData['user_username'],
+                'userData' => $userData
+            ];
+            return view('users/detail', $data);
+        } else {
+            return view('errors/notFound', ['title' => 'Data not found!']);
+        }
     }
 
     public function edit($username)
     {
         $userData = $this->userModel->getByUsername($username);
-        $data = [
-            'title' => 'Edit ' . $username,
-            'userData' => $userData,
-        ];
-        return view('users/edit', $data);
+
+        if ($userData) {
+            $data = [
+                'title' => 'Detail ' . $userData['user_username'],
+                'userData' => $userData
+            ];
+            return view('users/edit', $data);
+        } else {
+            return view('errors/notFound', ['title' => 'Data not found!']);
+        }
     }
     public function update($username)
     {
@@ -116,7 +141,7 @@ class Users extends BaseController
 
         $this->userModel->save($data);
 
-        session()->setFlashdata('success', 'Data <a href="users/' . $username . '" class="text-uppercase"><strong>' . $username . '</strong></a> successfully updated!');
+        session()->setFlashdata('success', 'Data <a href="' . $username . '" class="text-uppercase"><strong>' . $username . '</strong></a> successfully updated!');
         return redirect()->to('users/' . $username);
     }
 

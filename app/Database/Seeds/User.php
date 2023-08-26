@@ -9,7 +9,7 @@ class User extends Seeder
     public function run()
     {
         $faker = \Faker\Factory::create('id_ID');
-        for ($i = 0; $i < 50; $i++) {
+        for ($i = 0; $i < 150; $i++) {
             $namaGenerate = $faker->unique()->userName;
             $data = [
                 'user_fullname' =>  $namaGenerate,

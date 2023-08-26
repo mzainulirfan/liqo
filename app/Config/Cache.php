@@ -127,7 +127,7 @@ class Cache extends BaseConfig
      * @var array<string, bool|int|string>
      */
     public array $memcached = [
-        'host'   => '127.0.0.1',
+        'host'   => 'localhost',
         'port'   => 11211,
         'weight' => 1,
         'raw'    => false,
