@@ -27,7 +27,7 @@
              <li class="nav-item">
                  <a href="<?= base_url(); ?>" class="nav-link d-flex align-items-center">
                      <span class="sidebar-icon">
-                         <img src="<?= base_url(); ?>src/assets/img/brand/light.svg" height="20" width="20" alt="Volt Logo">
+                         <img src="<?= base_url(); ?>src/assets/img/brand/logo.png" height="20" width="20" alt="Volt Logo">
                      </span>
                      <span class="mt-1 ms-1 sidebar-text">My Liqo'</span>
                  </a>

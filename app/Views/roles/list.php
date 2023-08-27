@@ -1,6 +1,6 @@
 <?= $this->extend('layout/default'); ?>
 <?= $this->section('content'); ?>
-<div class="col-12 col-xxl-6 mb-4">
+<div class="col-12 mb-4">
     <div class="card border-0 shadow">
         <div class="card-header border-bottom d-flex align-items-center justify-content-between">
             <h2 class="fs-5 fw-bold mb-0">Role Lists</h2><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create role</button>

@@ -1,7 +1,7 @@
 <?= $this->extend('layout/default'); ?>
 <?= $this->section('content'); ?>
 <div class="row">
-    <div class="col-12 col-xxl-4 mb-4">
+    <div class="col-12 mb-4">
         <div class="card border-0 shadow">
             <div class="card-body text-center py-4 py-xl-5">
                 <h3 class="display-3 fw-extrabold mb-0">Dashboard page</h3>
