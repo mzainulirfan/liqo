@@ -118,17 +118,20 @@
     <div class="card border-0 shadow">
         <div class="card-header border-bottom d-flex align-items-center justify-content-between">
             <h2 class="fs-5 fw-bold mb-0">User List</h2>
-            <a href="<?= base_url(); ?>users/create" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
-                <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
-                </svg>
-                Create New User
-            </a>
+            <div class="w-50">
+                <form action="" method="post">
+                    <div class="input-group">
+                        <input type="text" class="form-control" name="keyword" placeholder="Search name ..." aria-label="Recipient's username with two button addons">
+                        <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        <a href="<?= base_url(); ?>users/create" class="btn btn-outline-none text-info"><i class="bx bx-plus"></i>&nbsp;New User</a>
+                    </div>
+                </form>
+            </div>
         </div>
         <div class="card-body">
             <?php if (empty($userData)) : ?>
                 <div class="card-body text-center py-4 py-xl-5">
-                    <p>Data Kosong!</p><a href="#" class="btn btn-primary d-inline-flex align-items-center">
+                    <p>Data Kosong!</p><a href="<?= base_url(); ?>users" class="btn btn-primary d-inline-flex align-items-center">
                         <svg class="icon icon-xxs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd"></path>
                         </svg> Create new user</a>
@@ -146,7 +149,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i = 1;
+                            <?php $i = 1 + ($perPage * ($currenPage - 1));
                             foreach ($userData as $user) : ?>
                                 <tr>
                                     <td><?= $i++; ?></td>
@@ -174,6 +177,9 @@
                             <?php endforeach; ?>
                         </tbody>
                     </table>
+                </div>
+                <div class="mt-3">
+                    <?= $pager->links('users', 'usersPager'); ?>
                 </div>
             <?php endif; ?>
         </div>

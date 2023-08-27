@@ -12,37 +12,50 @@ class Users extends BaseController
     {
         $this->userModel = new UserModel();
     }
+
     public function index()
     {
+        $perPage = 10;
+        $currentPage = $this->request->getVar('page_users') ? $this->request->getVar('page_users') : 1;
         $cache = \Config\Services::cache();
 
+        $keyword =  $this->request->getVar('keyword');
+        if ($keyword) {
+            $allDataUser = $this->userModel->search($keyword)->paginate($perPage, 'users');
+        } else {
+            $allDataUser = $this->userModel->paginate($perPage, 'users');
+        }
+
         // Contoh penggunaan cache
-        if ($userData = $cache->get('userDataCache')) {
+        $cacheKey = 'userListPage_' . $currentPage;
+        if ($userData = $cache->get($cacheKey)) {
             // Data ditemukan di cache
             $cachedData = true;
         } else {
             // Data tidak ditemukan di cache, ambil dari sumber asli dan simpan ke cache
-            $userData = $this->userModel->findAll();
-            $cache->save('userDataCache', $userData, 30); // Simpan dalam cache selama 1 jam (3600 detik)
+            $userData = $allDataUser;
+            $cache->save($cacheKey, $userData, 3600); // Simpan dalam cache selama 1 jam (3600 detik)
             $cachedData = false;
         }
 
         $today = date('Y-m-d');
         $data = [
             'title' => 'Daftar User',
-            'userData' => $userData,
+            // 'userData' => $this->userModel->paginate($perPage, 'users'),
+            'userData' => $allDataUser,
+            'pager' => $this->userModel->pager,
+            'currenPage' => $currentPage,
+            'perPage' => $perPage,
             'countAllUser' => $this->userModel->countAllResults(),
             'countAllUserToday' => $this->userModel->countUserToday($today),
             'cachedData' => $cachedData,
         ];
         return view('users/list', $data);
     }
+
     public function create()
     {
-        $data = [
-            'title' => 'Create user'
-        ];
-        return view('users/create', $data);
+        return view('users/create', ['title' => 'Create user']);
     }
     public function save()
     {

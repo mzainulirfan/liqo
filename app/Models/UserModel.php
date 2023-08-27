@@ -12,7 +12,11 @@ class UserModel extends Model
 
     public function getByUsername($username)
     {
-        return $this->table('users')->where('user_username', $username)->first();
+        return $this->where('user_username', $username)->first();
+    }
+    public function search($keyword)
+    {
+        return $this->table('users')->like('user_fullname', $keyword)->orLike('user_username', $keyword);
     }
     public function countUserToday($today)
     {
