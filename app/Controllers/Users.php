@@ -7,9 +7,11 @@ use App\Models\UserModel;
 
 class Users extends BaseController
 {
+    private $uri;
     private $userModel;
     public function __construct()
     {
+        $this->uri = service('uri');
         $this->userModel = new UserModel();
     }
 
@@ -49,6 +51,7 @@ class Users extends BaseController
             'countAllUser' => $this->userModel->countAllResults(),
             'countAllUserToday' => $this->userModel->countUserToday($today),
             'cachedData' => $cachedData,
+            'username' => $this->uri->getSegment(2)
         ];
         return view('users/list', $data);
     }
@@ -93,7 +96,8 @@ class Users extends BaseController
         if ($userData) {
             $data = [
                 'title' => 'Detail ' . $userData['user_username'],
-                'userData' => $userData
+                'userData' => $userData,
+                'username' => $this->uri->getSegment(2)
             ];
             return view('users/detail', $data);
         } else {
@@ -108,7 +112,8 @@ class Users extends BaseController
         if ($userData) {
             $data = [
                 'title' => 'Detail ' . $userData['user_username'],
-                'userData' => $userData
+                'userData' => $userData,
+                'username' => $this->uri->getSegment(2)
             ];
             return view('users/edit', $data);
         } else {

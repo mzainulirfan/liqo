@@ -17,3 +17,9 @@ $routes->group('users', function ($routes) {
     $routes->post('update/(:any)', 'Users::update/$1');
     $routes->delete('(:num)', 'Users::delete/$1');
 });
+$routes->group('roles', function ($routes) {
+    $routes->get('/', 'Roles::index');
+    $routes->get('create', 'Roles::create');
+    $routes->get('(:any)', 'Roles::detail/$1');
+    $routes->post('save', 'Roles::save');
+});
