@@ -46,7 +46,7 @@
                  </li>
 
                  <li class="nav-item ">
-                     <span class="nav-link  d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-app">
+                     <span class="nav-link  d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-user">
                          <span>
                              <span class="sidebar-icon">
                                  <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -61,7 +61,7 @@
                              </svg>
                          </span>
                      </span>
-                     <div class="multi-level collapse   <?= ($uri->getSegment(1) == 'users') ? 'show' : ''; ?>" role="list" id="submenu-app" aria-expanded="false">
+                     <div class="multi-level collapse   <?= ($uri->getSegment(1) == 'users') ? 'show' : ''; ?>" role="list" id="submenu-user" aria-expanded="false">
                          <ul class="flex-column nav">
                              <li class="nav-item  <?= ($uri->getSegment(1) === 'users'
                                                         && (isset($username) ? $uri->getSegment(2) === $username : $uri->getSegment(2) === null)) ?
@@ -87,6 +87,37 @@
                          </span>
                          <span class="sidebar-text">Role Management</span>
                      </a>
+                 </li>
+                 <li class="nav-item">
+                     <span class="nav-link  d-flex justify-content-between align-items-center" data-bs-toggle="collapse" data-bs-target="#submenu-liqo">
+                         <span>
+                             <span class="sidebar-icon">
+                                 <svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                     <path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"></path>
+                                 </svg>
+                             </span>
+                             <span class="sidebar-text">Liqo Management</span>
+                         </span>
+                         <span class="link-arrow">
+                             <svg class="icon icon-sm" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                             </svg>
+                         </span>
+                     </span>
+                     <div class="multi-level collapse" role="list" id="submenu-liqo" aria-expanded="false">
+                         <ul class="flex-column nav">
+                             <li class="nav-item">
+                                 <a class="nav-link" href="#">
+                                     <span class="sidebar-text">List Liqo</span>
+                                 </a>
+                             </li>
+                             <li class="nav-item">
+                                 <a class="nav-link" href="#">
+                                     <span class="sidebar-text">Create User</span>
+                                 </a>
+                             </li>
+                         </ul>
+                     </div>
                  </li>
                  <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
                  <li class="nav-item ">
