@@ -122,7 +122,7 @@
             <div class="w-50">
                 <form action="" method="post">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="keyword" placeholder="Search name ..." aria-label="Recipient's username with two button addons">
+                        <input type="text" class="form-control" name="keyword" placeholder="Search name ..." autofocus>
                         <button class="btn btn-outline-secondary" type="submit">Search</button>
                         <a href="<?= base_url(); ?>users/create" class="btn btn-outline-none text-info"><i class="bx bx-plus"></i>&nbsp;New User</a>
                     </div>

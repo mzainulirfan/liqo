@@ -1,7 +1,7 @@
 <?= $this->extend('layout/default'); ?>
 <?= $this->section('content'); ?>
 <div class="row">
-    <div class="col-12 col-xxl-4 mb-4">
+    <div class="col-12 mb-4">
         <div class="card border-0 shadow">
             <div class="card-body text-center py-4 py-xl-5">
                 <h3 class="display-3 fw-extrabold mb-0"><?= $roleData['name']; ?></h3>
@@ -13,36 +13,42 @@
     </div>
 </div>
 
-<div class="col-12 col-xxl-6 mb-4">
+<div class="col-12 mb-4">
     <div class="card border-0 shadow">
         <div class="card-header border-bottom d-flex align-items-center justify-content-between">
             <h2 class="fs-5 fw-bold mb-0">User Lists</h2><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Add member</button>
         </div>
 
         <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-centered table-bordered table-nowrap mb-0 rounded">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="border-0 rounded-start">No.</th>
-                            <th class="border-0">Name</th>
-                            <th class="border-0 rounded-end text-end">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1;
-                        foreach ($userRoleData as $data) : ?>
+            <?php if (empty($userRoleData)) : ?>
+                data not found!
+            <?php else : ?>
+                <div class="table-responsive">
+                    <table class="table table-centered table-bordered table-nowrap mb-0 rounded">
+                        <thead class="thead-light">
                             <tr>
-                                <td class="border-0 fw-bold"><?= $i++; ?></td>
-                                <td class="border-0 fw-bold"><?= $data['user_fullname']; ?></td>
-                                <td class="border-0 fw-bold text-end">
-                                    <a href="<?= base_url(); ?>users/<?= $data['user_username']; ?>" class="text-info">Detail</a>
-                                </td>
+                                <th class="border-0">No.</th>
+                                <th class="border-0">Name</th>
+                                <th class="border-0 text-end">&nbsp;</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-            </div>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1;
+                            foreach ($userRoleData as $data) : ?>
+                                <tr>
+                                    <td class="border-0 fw-bold"><?= $i++; ?></td>
+                                    <td class="border-0 fw-bold">
+                                        <a href="<?= base_url(); ?>users/<?= $data['user_username']; ?>" class="text-info"><?= $data['user_fullname']; ?></a>
+                                    </td>
+                                    <td class="border-0 fw-bold text-end">
+                                        <a href="#" class="text-danger" title="remove"><i class="bx bx-x-circle"></i>&nbsp;Remove</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
+            <?php endif; ?>
         </div>
     </div>
 </div>
