@@ -1,62 +1,48 @@
-# CodeIgniter 4 Application Starter
+# HalaqohManager
 
-## What is CodeIgniter?
+## Deskripsi:
+HalaqohManager adalah aplikasi pengelolaan halaqoh yang dirancang untuk membantu pengurus halaqoh, ustadz/ustadzah, dan peserta dalam mengorganisir, memantau, dan mengikuti kegiatan halaqoh dengan lebih efisien. Aplikasi ini akan memiliki fitur-fitur yang mendukung perencanaan, pelacakan kemajuan, dan komunikasi antara semua pihak terkait.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+## Fitur-Fitur Utama:
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+1. **Pengelolaan Halaqoh:**
+   - Pendaftaran Halaqoh: Pengurus dapat membuat profil halaqoh dengan informasi seperti topik, lokasi, jadwal, dan kuota peserta.
+   - Penugasan Ustadz/Ustadzah: Memungkinkan pengurus untuk menugaskan ustadz/ustadzah kepada setiap halaqoh berdasarkan keahlian dan ketersediaan.
+   - Manajemen Peserta: Daftar peserta halaqoh beserta data pribadi dan kemajuan pembelajaran mereka.
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+2. **Jadwal dan Presensi:**
+   - Jadwal Halaqoh: Pengurus dapat membuat jadwal berkala untuk halaqoh dan mengirimkan pemberitahuan kepada peserta.
+   - Presensi Otomatis: Peserta dapat mencatat kehadiran mereka melalui pemindaian kode QR atau sistem geolokasi saat mengikuti halaqoh.
 
-The user guide corresponding to the latest version of the framework can be found
-[here](https://codeigniter4.github.io/userguide/).
+3. **Materi Pembelajaran:**
+   - Pengunggahan Materi: Ustadz/ustadzah dapat mengunggah materi pelajaran, tugas, dan bahan bacaan.
+   - Akses Materi: Peserta dapat mengakses materi pembelajaran, mengunduh bahan, dan mengirim tugas secara online.
 
-## Installation & updates
+4. **Monitoring Kemajuan:**
+   - Evaluasi Peserta: Ustadz/ustadzah dapat memberikan penilaian dan umpan balik kepada peserta berdasarkan partisipasi, tugas, dan kemajuan mereka.
+   - Laporan Kemajuan: Peserta dapat melihat laporan tentang perkembangan mereka dalam halaqoh.
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+5. **Forum Diskusi:**
+   - Ruang Diskusi: Peserta dapat berpartisipasi dalam forum diskusi untuk berbagi pemahaman, bertanya, dan berdiskusi tentang topik yang diajarkan.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+6. **Notifikasi dan Pengingat:**
+   - Pengingat Kegiatan: Aplikasi akan mengirimkan pengingat tentang jadwal halaqoh, tugas, dan kegiatan terkait lainnya.
+   - Komunikasi Langsung: Peserta dan pengurus dapat berkomunikasi langsung melalui pesan dalam aplikasi.
 
-## Setup
+7. **Pelaporan dan Analisis:**
+   - Laporan Keuangan: Pengurus dapat melacak pemasukan dan pengeluaran yang terkait dengan halaqoh.
+   - Analisis Data: Fitur untuk melihat statistik kehadiran, kemajuan, dan partisipasi peserta.
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+## Keuntungan:
+- Meningkatkan efisiensi dalam mengelola jadwal, kehadiran, dan materi pembelajaran.
+- Meningkatkan interaksi dan komunikasi antara peserta, ustadz/ustadzah, dan pengurus.
+- Memungkinkan pemantauan kemajuan peserta secara lebih terperinci.
+- Menyediakan wadah untuk diskusi dan tanya jawab yang lebih terstruktur.
 
-## Important Change with index.php
+## Teknologi:
+- Aplikasi berbasis web dan mobile untuk akses yang lebih fleksibel.
+- Basis data untuk menyimpan informasi halaqoh, peserta, materi, dan riwayat kehadiran.
+- Integrasi dengan layanan notifikasi untuk pengingat dan komunikasi real-time.
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
-
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
-
-**Please** read the user guide for a better explanation of how CI4 works!
-
-## Repository Management
-
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
-
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
-
-## Server Requirements
-
-PHP version 7.4 or higher is required, with the following extensions installed:
-
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
-
-Additionally, make sure that the following extensions are enabled in your PHP:
-
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+## Kesimpulan:
+HalaqohManager adalah solusi komprehensif untuk mengelola halaqoh dengan efisien, meningkatkan interaksi, dan memantau kemajuan peserta. Dengan fitur-fitur yang mendukung perencanaan, pelacakan, dan komunikasi, aplikasi ini akan menjadi alat penting bagi semua pihak yang terlibat dalam pengelolaan halaqoh.
