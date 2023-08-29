@@ -65,78 +65,22 @@
                     <h2 class="fs-5 fw-bold mb-0">Meeting list</h2><a href="../users.html" class="btn btn-sm btn-primary">See all history</a>
                 </div>
                 <div class="card-body">
-                    <div class="row mb-4">
-                        <div class="col-auto"><svg class="icon icon-sm text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
-                            </svg></div>
-                        <div class="col">
-                            <div class="progress-wrapper">
-                                <div class="progress-info">
-                                    <div class="h6 mb-0">Rocket - SaaS Template</div>
-                                    <div class="small fw-bold text-gray-500"><span>75 %</span></div>
-                                </div>
-                                <div class="progress mb-0">
-                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%;"></div>
-                                </div>
+                    <?php foreach ($scheduleData as $schedule) : ?>
+                        <div class="row align-items-center d-block d-sm-flex border-bottom pb-4 mb-4">
+                            <div class="col-auto mb-3 mb-sm-0">
+                                <div class="calendar d-flex"><span class="calendar-month"><?= date('m', strtotime($schedule['date_at'])); ?></span><span class="calendar-day py-2"><?= date('d', strtotime($schedule['date_at'])); ?></span></div>
+                            </div>
+                            <div class="col"><a href="../calendar.html">
+                                    <h3 class="h5 mb-1"><?= $schedule['name']; ?></h3>
+                                </a><span><?= $schedule['descriptioan']; ?></span>
+                                <div class="small fw-bold">Time : <?= $schedule['start_at'] . ' - ' . $schedule['finish_at']; ?></div>
+                                <span class="small fw-bold">Place: <?= $schedule['location']; ?></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="row align-items-center mb-4">
-                        <div class="col-auto"><svg class="icon icon-sm text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
-                            </svg></div>
-                        <div class="col">
-                            <div class="progress-wrapper">
-                                <div class="progress-info">
-                                    <div class="h6 mb-0">Themesberg - Design System</div>
-                                    <div class="small fw-bold text-gray-500"><span>60 %</span></div>
-
-                                </div>
-                                <div class="progress mb-0">
-                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-4">
-                        <div class="col-auto"><svg class="icon icon-sm text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
-                            </svg></div>
-                        <div class="col">
-                            <div class="progress-wrapper">
-                                <div class="progress-info">
-                                    <div class="h6 mb-0">Homepage Design in Figma</div>
-                                    <div class="small fw-bold text-gray-500"><span>45 %</span></div>
-                                </div>
-                                <div class="progress mb-0">
-                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row align-items-center mb-3">
-                        <div class="col-auto"><svg class="icon icon-sm text-gray-500" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"></path>
-                                <path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path>
-                            </svg></div>
-                        <div class="col">
-                            <div class="progress-wrapper">
-                                <div class="progress-info">
-                                    <div class="h6 mb-0">Backend for Themesberg v2</div>
-                                    <div class="small fw-bold text-gray-500"><span>34 %</span></div>
-                                </div>
-                                <div class="progress mb-0">
-                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="34" aria-valuemin="0" aria-valuemax="100" style="width: 34%;"></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
             </div>
+        <?php endif ?>
         </div>
-    <?php endif ?>
 </div>
 <?= $this->endSection(); ?>

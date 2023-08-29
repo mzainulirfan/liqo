@@ -15,8 +15,13 @@ class CreateScheduleTable extends Migration
                 'unsigned' => true,
                 'auto_increment' => true
             ],
+            'name' => [
+                'type' => 'VARCHAR',
+                'constraint' => 100,
+                'null' => true
+            ],
             'slug' => [
-                'type' => 'INT',
+                'type' => 'VARCHAR',
                 'constraint' => '100',
                 'null' => true
             ],

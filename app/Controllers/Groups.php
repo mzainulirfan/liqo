@@ -6,17 +6,21 @@ use App\Controllers\BaseController;
 use App\Models\GroupsModel;
 use App\Models\UserRoleModel;
 use App\Models\GroupMembersModel;
+use App\Models\SchedulesModel;
 
 class Groups extends BaseController
 {
     private $groupModel;
     private $userRoleModel;
     private $memberModel;
+    private $scheduleModel;
+
     public function __construct()
     {
         $this->groupModel = new GroupsModel();
         $this->userRoleModel = new UserRoleModel();
         $this->memberModel = new GroupMembersModel();
+        $this->scheduleModel = new SchedulesModel();
     }
     public function index()
     {
@@ -57,11 +61,13 @@ class Groups extends BaseController
         $groupData = $this->groupModel->where('slug', $slug)->join('users', 'users.user_id=groups.mentor_user_id')->first();
         $groupId = $groupData['group_id'];
         $memberGroupData = $this->memberModel->where('group_id', $groupId)->join('users', 'users.user_id=group_members.user_id')->findAll();
-        // dd($memberGroupData);
+        $scheduleData = $this->scheduleModel->where('group_id', $groupId)->findAll();
+        // dd($scheduleData);
         $data = [
             'title' => 'Detail group',
             'groupData' => $groupData,
-            'memberGroup' => $memberGroupData
+            'memberGroup' => $memberGroupData,
+            'scheduleData' => $scheduleData
         ];
         return view('groups/detail', $data);
     }

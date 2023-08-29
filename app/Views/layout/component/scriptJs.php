@@ -10,3 +10,6 @@
 
  <!-- Volt JS -->
  <script src="<?= base_url(); ?>src/assets/js/volt.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+ <!-- myScript  -->
+ <script src="<?= base_url(); ?>src/assets/js/myscript.js"></script>

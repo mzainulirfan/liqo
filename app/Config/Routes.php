@@ -22,6 +22,7 @@ $routes->group('roles', function ($routes) {
     $routes->get('create', 'Roles::create');
     $routes->get('(:any)', 'Roles::detail/$1');
     $routes->post('save', 'Roles::save');
+    $routes->post('update', 'Roles::update');
 });
 $routes->group('schedule', function ($routes) {
     $routes->get('/', 'Schedule::index');
