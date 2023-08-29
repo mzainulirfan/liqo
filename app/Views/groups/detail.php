@@ -62,7 +62,7 @@
         <div class="col-6 mb-4">
             <div class="card border-0 shadow">
                 <div class="card-header border-bottom d-flex align-items-center justify-content-between">
-                    <h2 class="fs-5 fw-bold mb-0">Progress track</h2><a href="../users.html" class="btn btn-sm btn-primary">See tasks</a>
+                    <h2 class="fs-5 fw-bold mb-0">Meeting list</h2><a href="../users.html" class="btn btn-sm btn-primary">See all history</a>
                 </div>
                 <div class="card-body">
                     <div class="row mb-4">
