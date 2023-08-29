@@ -86,11 +86,19 @@ class Roles extends BaseController
         ];
         if (!$this->validate($valiadationRoles)) {
             session()->setFlashdata('error', $this->validator->listErrors());
-            return redirect()->to('roles')->withInput()->with('validator', $this->validator);
+            return redirect()->back()->withInput()->with('validator', $this->validator);
         }
 
         $this->roleModel->save($data);
         session()->setFlashdata('success', 'Role updated successfully!');
+        return redirect()->to('roles');
+    }
+    public function delete()
+    {
+        $roleId = $this->request->getVar('id');
+        $this->roleModel->delete($roleId);
+
+        session()->setFlashdata('success', 'Data successfully deleted!');
         return redirect()->to('roles');
     }
 }

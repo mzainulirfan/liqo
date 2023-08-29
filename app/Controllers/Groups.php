@@ -71,4 +71,37 @@ class Groups extends BaseController
         ];
         return view('groups/detail', $data);
     }
+    public function update()
+    {
+        $groupName =  $this->request->getVar('name');
+        $groupId =  $this->request->getVar('id');
+        $groupData = $this->groupModel->where('group_id', $groupId)->first();
+        $groupNameExist = $groupData['name'];
+
+        // dd($groupNameExist, $groupName);
+        // dd($this->request->getVar());
+
+        if ($groupNameExist == $groupName) {
+            $roleName = 'required';
+        } else {
+            $roleName = 'required|is_unique[roles.name]';
+        }
+
+        $valiadationRoles = [
+            'name' => $roleName
+        ];
+
+        if (!$this->validate($valiadationRoles)) {
+            session()->setFlashdata('error', $this->validator->listErrors());
+            return redirect()->back()->withInput()->with('validator', $this->validator);
+        }
+
+        $data = [
+            'group_id' => $groupId,
+            'name' =>  $this->request->getVar('name')
+        ];
+        $this->groupModel->save($data);
+        session()->setFlashdata('success', 'Group saved successfully!');
+        return redirect()->to('groups');
+    }
 }

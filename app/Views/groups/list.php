@@ -33,14 +33,15 @@
                         <tbody>
                             <?php $i = 1;
                             foreach ($groupData as $group) : ?>
-                                <tr>
+                                <tr style="vertical-align:middle;">
                                     <td class="border-0 fw-bold"><?= $i++; ?></td>
                                     <td class="border-0 fw-bold"><?= esc($group['name']); ?></td>
                                     <td class="border-0 fw-bold">
                                         <a href="<?= base_url(); ?>users/<?= esc($group['user_username']); ?>"><?= esc($group['user_fullname']); ?></a>
                                     </td>
-                                    <td class="border-0 fw-bold text-end">
-                                        <a href="<?= base_url(); ?>groups/<?= esc($group['slug']); ?>" class="text-info">Detail</a>
+                                    <td class="border-0 fw-bold text-end d-flex justify-content-end align-items-center">
+                                        <a href="<?= base_url(); ?>groups/<?= esc($group['slug']); ?>" class="btn btn-outline-none btn-sm text-info">Detail</a>
+                                        <a href="javascript:;" class="btn btn-outline-none btn-sm text-info" data-bs-toggle="modal" data-bs-target="#editgroup" type="button" data-id="<?= $group['group_id'] ?>" data-name="<?= $group['name']; ?>" data-slug="<?= $group['slug']; ?>">Rename </a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
@@ -52,7 +53,7 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal create group -->
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
@@ -79,6 +80,33 @@
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary float-end mt-2">Save group</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Edit group -->
+<div class="modal fade" id="editgroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editroleLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit role</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="<?= base_url(); ?>groups/update/">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="id" id="id" value="<?= $group['group_id']; ?>">
+                    <input type="hidden" name="slug" id="slug" value="<?= $group['slug']; ?>">
+                    <div class="mb-3">
+                        <label for="name" class="col-form-label">Name:</label>
+                        <input type="text" class="form-control <?= (session()->has('validation') && ($validation = session('validation'))->hasError('name')) ? 'is-invalid' : '' ?>" name="name" id="name" value="<?= old('name'); ?>">
+                        <div class="invalid-feedback">
+                            <?= session()->has('validation') && session('validation')->hasError('name') ? session('validation')->getError('name') : '' ?>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary float-end mt-2">Update group</button>
                 </form>
             </div>
         </div>

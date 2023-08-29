@@ -23,6 +23,7 @@ $routes->group('roles', function ($routes) {
     $routes->get('(:any)', 'Roles::detail/$1');
     $routes->post('save', 'Roles::save');
     $routes->post('update', 'Roles::update');
+    $routes->delete('delete', 'Roles::delete');
 });
 $routes->group('schedule', function ($routes) {
     $routes->get('/', 'Schedule::index');
@@ -35,6 +36,6 @@ $routes->group('groups', function ($routes) {
     $routes->get('(:any)', 'Groups::detail/$1');
     $routes->post('/', 'Groups::index');
     $routes->post('save', 'Groups::save');
-    $routes->post('update/(:any)', 'Groups::update/$1');
+    $routes->post('update', 'Groups::update');
     $routes->delete('(:num)', 'Groups::delete/$1');
 });

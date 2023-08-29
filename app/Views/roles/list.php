@@ -32,9 +32,10 @@
                             <tr style="vertical-align:middle;">
                                 <td class="border-0 fw-bold"><?= $i++; ?></td>
                                 <td class="border-0 fw-bold"><?= $role['name']; ?></td>
-                                <td class="border-0 fw-bold text-end d-flex align-items-center justify-content-end">
+                                <td class="border-0 fw-bold text-end">
+                                    <a href=" <?= base_url(); ?>roles/<?= $role['slug']; ?>" class="btn btn-outline-none btn-sm text-info">Detail</a>
                                     <a href="javascript:;" class="btn btn-outline-none btn-sm text-info" data-bs-toggle="modal" data-bs-target="#editrole" type="button" data-id="<?= $role['id'] ?>" data-name="<?= $role['name']; ?>" data-slug="<?= $role['slug']; ?>" data-description="<?= $role['description']; ?>">Rename </a>
-                                    <a href=" <?= base_url(); ?>roles/<?= $role['slug']; ?>" class="text-info">Detail</a>
+                                    <a href="javascript:;" class="btn btn-outline-none btn-sm text-danger" data-bs-toggle="modal" data-bs-target="#removerole" type="button" data-id="<?= $role['id'] ?>" data-name="<?= $role['name']; ?>">Remove </a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -110,4 +111,30 @@
         </div>
     </div>
 </div>
+
+<!-- Modal confirm delete -->
+<div class="modal fade" id="removerole" tabindex="-1" data-bs-backdrop="static" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure to remove this role?
+            </div>
+            <div class="modal-footer">
+                <form action="<?= base_url(); ?>roles/delete" method="post">
+                    <?= csrf_field(); ?>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <input type="hidden" name="id" value="<?= $role['id']; ?>">
+                    <input type="hidden" name="name" value="<?= $role['name']; ?>">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">Remove</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?= $this->endSection(); ?>
