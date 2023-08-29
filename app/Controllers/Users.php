@@ -39,7 +39,6 @@ class Users extends BaseController
             $cache->save($cacheKey, $userData, 3600); // Simpan dalam cache selama 1 jam (3600 detik)
             $cachedData = false;
         }
-
         $today = date('Y-m-d');
         $data = [
             'title' => 'Daftar User',
@@ -78,7 +77,7 @@ class Users extends BaseController
             'user_address' =>  $this->request->getVar('address'),
             'created_at' => date("Y-m-d H:i:s")
         ];
-
+       
         if (!$this->validate($validationRules)) {
             return redirect()->to('users/create')->withInput()->with('validation', $this->validator);
         }
@@ -132,7 +131,6 @@ class Users extends BaseController
         } else {
             $fullnameRole = 'required|min_length[5]|is_unique[users.user_fullname]';
         }
-        // dd($fullnameRole, $fullname, $fullnameNew);
         $validationRules  = [
             'fullname' => $fullnameRole,
             'phone_number' => 'required|numeric|min_length[10]',
