@@ -27,3 +27,13 @@ $routes->group('schedule', function ($routes) {
     $routes->get('/', 'Schedule::index');
     $routes->get('create', 'Schedule::create');
 });
+$routes->group('groups', function ($routes) {
+    $routes->get('/', 'Groups::index');
+    $routes->get('create', 'Groups::create');
+    $routes->get('(:any)/edit', 'Groups::edit/$1');
+    $routes->get('(:any)', 'Groups::detail/$1');
+    $routes->post('/', 'Groups::index');
+    $routes->post('save', 'Groups::save');
+    $routes->post('update/(:any)', 'Groups::update/$1');
+    $routes->delete('(:num)', 'Groups::delete/$1');
+});

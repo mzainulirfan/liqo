@@ -3,7 +3,7 @@
 <div class="col-12 mb-4">
     <div class="card border-0 shadow">
         <div class="card-header border-bottom d-flex align-items-center justify-content-between">
-            <h2 class="fs-5 fw-bold mb-0">Role Lists</h2><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create role</button>
+            <h2 class="fs-5 fw-bold mb-0">Role Lists</h2><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create group</button>
         </div>
 
         <div class="card-body">
@@ -24,17 +24,21 @@
                         <tr>
                             <th class="border-0 rounded-start">No.</th>
                             <th class="border-0">Name</th>
+                            <th class="border-0">Mentor</th>
                             <th class="border-0 rounded-end text-end">&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php $i = 1;
-                        foreach ($roleData as $role) : ?>
+                        foreach ($groupData as $group) : ?>
                             <tr>
                                 <td class="border-0 fw-bold"><?= $i++; ?></td>
-                                <td class="border-0 fw-bold"><?= $role['name']; ?></td>
+                                <td class="border-0 fw-bold"><?= esc($group['name']); ?></td>
+                                <td class="border-0 fw-bold">
+                                    <a href="<?= base_url(); ?>users/<?= esc($group['user_username']); ?>"><?= esc($group['user_fullname']); ?></a>
+                                </td>
                                 <td class="border-0 fw-bold text-end">
-                                    <a href="<?= base_url(); ?>roles/<?= $role['slug']; ?>" class="text-info">Detail</a>
+                                    <a href="<?= base_url(); ?>groups/<?= esc($group['slug']); ?>" class="text-info">Detail</a>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -50,11 +54,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Create new role</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Create new group</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form method="post" action="<?= base_url(); ?>roles/save">
+                <form method="post" action="<?= base_url(); ?>groups/save">
                     <?= csrf_field(); ?>
                     <div class="mb-3">
                         <label for="name" class="col-form-label">Name:</label>
@@ -64,13 +68,14 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="description" class="col-form-label">Description:</label>
-                        <textarea class="form-control <?= (session()->has('validation') && ($validation = session('validation'))->hasError('description')) ? 'is-invalid' : '' ?>" id="description" name="description"><?= old('description'); ?></textarea>
-                        <div class="invalid-feedback">
-                            <?= session()->has('validation') && session('validation')->hasError('description') ? session('validation')->getError('description') : '' ?>
-                        </div>
+                        <label for="mentor" class="col-form-label">Mentor:</label>
+                        <select name="mentor_id" id="mentor" class="form-control">
+                            <?php foreach ($dataMentor as $mentor) : ?>
+                                <option value="<?= $mentor['user_id']; ?>"><?= $mentor['user_fullname']; ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
-                    <button type="submit" class="btn btn-primary float-end mt-2">Save Role</button>
+                    <button type="submit" class="btn btn-primary float-end mt-2">Save group</button>
                 </form>
             </div>
         </div>

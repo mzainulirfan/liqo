@@ -17,4 +17,8 @@ class UserRoleModel extends Model
             ->join('users', 'user_roles.user_id=users.user_id')
             ->findAll();
     }
+    public function getByRoleIdMentor()
+    {
+        return $this->where('role_id', 2)->join('users', 'users.user_id=user_roles.user_id')->findAll();
+    }
 }
