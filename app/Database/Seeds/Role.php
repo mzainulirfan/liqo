@@ -9,10 +9,9 @@ class Role extends Seeder
     public function run()
     {
         $data = [
-            ['name' => 'Admin Sistem', 'description' => 'Administrator Sistem', 'slug' => 'admin-sistem'],
-            ['name' => 'Pengurus', 'description' => 'Pengurus Halaqoh', 'slug' => 'pengurus'],
-            ['name' => 'Ustadz/Ustadzah', 'description' => 'Ustadz/Ustadzah Halaqoh', 'slug' => 'ustadz'],
-            ['name' => 'Peserta', 'description' => 'Peserta Halaqoh', 'slug' => 'peserta'],
+            ['name' => 'Administrator', 'description' => 'Administrator Sistem', 'slug' => 'administrator'],
+            ['name' => 'mentor', 'description' => 'Ustadz/Ustadzah Halaqoh', 'slug' => 'mentor'],
+            ['name' => 'member', 'description' => 'Peserta liqo', 'slug' => 'member'],
         ];
 
         // Insert data to roles table

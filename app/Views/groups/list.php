@@ -3,49 +3,52 @@
 <div class="col-12 mb-4">
     <div class="card border-0 shadow">
         <div class="card-header border-bottom d-flex align-items-center justify-content-between">
-            <h2 class="fs-5 fw-bold mb-0">Role Lists</h2><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create group</button>
+            <h2 class="fs-5 fw-bold mb-0">Group lists</h2><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create group</button>
         </div>
-
-        <div class="card-body">
-            <?php if (session()->has('error') || session()->has('success')) : ?>
-                <div class="alert <?php echo session()->has('error') ? 'alert-danger' : 'alert-info'; ?>" role="alert">
-                    <?php if (session()->has('error')) : ?>
-                        <p>Periksa Entri Form</p>
-                        </hr />
-                        <?php echo session('error'); ?>
-                    <?php else : ?>
-                        <?php echo session('success'); ?>
-                    <?php endif; ?>
-                </div>
-            <?php endif; ?>
-            <div class="table-responsive">
-                <table class="table table-centered table-bordered table-nowrap mb-0 rounded">
-                    <thead class="thead-light">
-                        <tr>
-                            <th class="border-0 rounded-start">No.</th>
-                            <th class="border-0">Name</th>
-                            <th class="border-0">Mentor</th>
-                            <th class="border-0 rounded-end text-end">&nbsp;</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php $i = 1;
-                        foreach ($groupData as $group) : ?>
+        <?php if (empty($groupData)) : ?>
+            <div class="text-center py-5 text-danger"> Data not found!</div>
+        <?php else : ?>
+            <div class="card-body">
+                <?php if (session()->has('error') || session()->has('success')) : ?>
+                    <div class="alert <?php echo session()->has('error') ? 'alert-danger' : 'alert-info'; ?>" role="alert">
+                        <?php if (session()->has('error')) : ?>
+                            <p>Periksa Entri Form</p>
+                            </hr />
+                            <?php echo session('error'); ?>
+                        <?php else : ?>
+                            <?php echo session('success'); ?>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+                <div class="table-responsive">
+                    <table class="table table-centered table-bordered table-nowrap mb-0 rounded">
+                        <thead class="thead-light">
                             <tr>
-                                <td class="border-0 fw-bold"><?= $i++; ?></td>
-                                <td class="border-0 fw-bold"><?= esc($group['name']); ?></td>
-                                <td class="border-0 fw-bold">
-                                    <a href="<?= base_url(); ?>users/<?= esc($group['user_username']); ?>"><?= esc($group['user_fullname']); ?></a>
-                                </td>
-                                <td class="border-0 fw-bold text-end">
-                                    <a href="<?= base_url(); ?>groups/<?= esc($group['slug']); ?>" class="text-info">Detail</a>
-                                </td>
+                                <th class="border-0 rounded-start">No.</th>
+                                <th class="border-0">Name</th>
+                                <th class="border-0">Mentor</th>
+                                <th class="border-0 rounded-end text-end">&nbsp;</th>
                             </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <?php $i = 1;
+                            foreach ($groupData as $group) : ?>
+                                <tr>
+                                    <td class="border-0 fw-bold"><?= $i++; ?></td>
+                                    <td class="border-0 fw-bold"><?= esc($group['name']); ?></td>
+                                    <td class="border-0 fw-bold">
+                                        <a href="<?= base_url(); ?>users/<?= esc($group['user_username']); ?>"><?= esc($group['user_fullname']); ?></a>
+                                    </td>
+                                    <td class="border-0 fw-bold text-end">
+                                        <a href="<?= base_url(); ?>groups/<?= esc($group['slug']); ?>" class="text-info">Detail</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 </div>
 

@@ -5,7 +5,6 @@
         <div class="card-header border-bottom d-flex align-items-center justify-content-between">
             <h2 class="fs-5 fw-bold mb-0">Role Lists</h2><button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Create role</button>
         </div>
-
         <div class="card-body">
             <?php if (session()->has('error') || session()->has('success')) : ?>
                 <div class="alert <?php echo session()->has('error') ? 'alert-danger' : 'alert-info'; ?>" role="alert">
