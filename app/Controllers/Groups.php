@@ -7,6 +7,7 @@ use App\Models\GroupsModel;
 use App\Models\UserRoleModel;
 use App\Models\GroupMembersModel;
 use App\Models\SchedulesModel;
+use App\Models\UserModel;
 
 class Groups extends BaseController
 {
@@ -14,6 +15,7 @@ class Groups extends BaseController
     private $userRoleModel;
     private $memberModel;
     private $scheduleModel;
+    private $userModel;
 
     public function __construct()
     {
@@ -21,6 +23,7 @@ class Groups extends BaseController
         $this->userRoleModel = new UserRoleModel();
         $this->memberModel = new GroupMembersModel();
         $this->scheduleModel = new SchedulesModel();
+        $this->userModel = new UserModel();
     }
     public function index()
     {
@@ -62,12 +65,14 @@ class Groups extends BaseController
         $groupId = $groupData['group_id'];
         $memberGroupData = $this->memberModel->where('group_id', $groupId)->join('users', 'users.user_id=group_members.user_id')->findAll();
         $scheduleData = $this->scheduleModel->where('group_id', $groupId)->findAll();
+        $userData = $this->userRoleModel->where('role_id', 2)->join('users', 'users.user_id=user_roles.user_id')->findAll();
         // dd($scheduleData);
         $data = [
             'title' => 'Detail group',
             'groupData' => $groupData,
             'memberGroup' => $memberGroupData,
-            'scheduleData' => $scheduleData
+            'scheduleData' => $scheduleData,
+            'userData' => $userData
         ];
         return view('groups/detail', $data);
     }
@@ -77,9 +82,6 @@ class Groups extends BaseController
         $groupId =  $this->request->getVar('id');
         $groupData = $this->groupModel->where('group_id', $groupId)->first();
         $groupNameExist = $groupData['name'];
-
-        // dd($groupNameExist, $groupName);
-        // dd($this->request->getVar());
 
         if ($groupNameExist == $groupName) {
             $roleName = 'required';
@@ -100,8 +102,24 @@ class Groups extends BaseController
             'group_id' => $groupId,
             'name' =>  $this->request->getVar('name')
         ];
+
         $this->groupModel->save($data);
+
         session()->setFlashdata('success', 'Group saved successfully!');
         return redirect()->to('groups');
+    }
+
+    public function addToInvite($userId, $slug)
+    {
+        $user = $this->userModel->where('user_id', $userId)->first();
+        $userInvite = [
+            'user_id' => $user['user_id'],
+            'user_fullname' => $user['user_fullname']
+        ];
+        session()->set('userInvite', $userInvite);
+        $userInvite = session('userInvite');
+        dd($userInvite);
+
+        return redirect()->to('/groups/' . $slug)->with('success', 'User information added to invite.');
     }
 }

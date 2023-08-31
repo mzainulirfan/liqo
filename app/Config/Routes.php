@@ -32,6 +32,7 @@ $routes->group('schedule', function ($routes) {
 $routes->group('groups', function ($routes) {
     $routes->get('/', 'Groups::index');
     $routes->get('create', 'Groups::create');
+    $routes->get('(:num)/(:any)', 'Groups::addToInvite/$1/$2');
     $routes->get('(:any)/edit', 'Groups::edit/$1');
     $routes->get('(:any)', 'Groups::detail/$1');
     $routes->post('/', 'Groups::index');

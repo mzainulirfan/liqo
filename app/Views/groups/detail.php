@@ -32,7 +32,7 @@
         <div class="col-6 mb-4">
             <div class="card border-0 shadow">
                 <div class="card-header border-bottom d-flex align-items-center justify-content-between">
-                    <h2 class="fs-5 fw-bold mb-0">Group member</h2><a href="../users.html" class="btn btn-sm btn-primary">See all</a>
+                    <h2 class="fs-5 fw-bold mb-0">Group member</h2><a href="javascript:;" data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btn btn-sm btn-primary">Invite member</a>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush list my--3">
@@ -46,12 +46,17 @@
                                     <div class="col-auto ms--2">
                                         <h4 class="h6 mb-0"><a href="#"><?= $member['user_fullname']; ?></a></h4>
                                         <div class="d-flex align-items-center">
-                                            <div class="bg-warning dot rounded-circle me-1"></div><small>In a meeting</small>
+                                            <div class="bg-warning dot rounded-circle me-1"></div>
+                                            <small>In a meeting</small>
                                         </div>
                                     </div>
-                                    <div class="col text-end"><a href="#" class="btn btn-sm btn-secondary d-inline-flex align-items-center"><svg class="icon icon-xxs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <div class="col text-end">
+                                        <a href="#" class="btn btn-sm btn-secondary d-inline-flex align-items-center">
+                                            <svg class="icon icon-xxs me-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                                 <path fill-rule="evenodd" d="M18 5v8a2 2 0 01-2 2h-5l-5 4v-4H4a2 2 0 01-2-2V5a2 2 0 012-2h12a2 2 0 012 2zM7 8H5v2h2V8zm2 0h2v2H9V8zm6 0h-2v2h2V8z" clip-rule="evenodd"></path>
-                                            </svg> Message</a></div>
+                                            </svg> Message
+                                        </a>
+                                    </div>
                                 </div>
                             </li>
                         <?php endforeach; ?>
@@ -68,7 +73,7 @@
                     <?php foreach ($scheduleData as $schedule) : ?>
                         <div class="row align-items-center d-block d-sm-flex border-bottom pb-4 mb-4">
                             <div class="col-auto mb-3 mb-sm-0">
-                                <div class="calendar d-flex"><span class="calendar-month"><?= date('m', strtotime($schedule['date_at'])); ?></span><span class="calendar-day py-2"><?= date('d', strtotime($schedule['date_at'])); ?></span></div>
+                                <div class="calendar d-flex"><span class="calendar-month"><?= substr(date('F', strtotime($schedule['date_at'])), 0, 3); ?></span><span class="calendar-day py-2"><?= date('d', strtotime($schedule['date_at'])); ?></span></div>
                             </div>
                             <div class="col"><a href="../calendar.html">
                                     <h3 class="h5 mb-1"><?= $schedule['name']; ?></h3>
@@ -80,7 +85,46 @@
                     <?php endforeach; ?>
                 </div>
             </div>
-        <?php endif ?>
         </div>
+    <?php endif ?>
+</div>
+
+<!-- Modal invite user-->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="staticBackdropLabel">Select user to invite</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">No</th>
+                            <th scope="col">Fullname</th>
+                            <th scope="col">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1;
+                        foreach ($userData as $user) : ?>
+                            <tr>
+                                <th scope="row"><?= $i++; ?></th>
+                                <td><?= esc($user['user_fullname']); ?></td>
+                                <td class="text-end">
+                                    <a href="<?= base_url(); ?>groups/<?= $user['user_id']; ?>/<?= $groupData['slug']; ?>" class="btn btn-primary btn-sm">Invite</a>
+                                </td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Understood</button>
+            </div>
+        </div>
+    </div>
 </div>
 <?= $this->endSection(); ?>
