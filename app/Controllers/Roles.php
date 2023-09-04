@@ -3,8 +3,8 @@
 namespace App\Controllers;
 
 use App\Controllers\BaseController;
-use App\models\RolesModel;
-use App\models\UserRoleModel;
+use App\Models\RolesModel;
+use App\Models\UserRoleModel;
 
 class Roles extends BaseController
 {

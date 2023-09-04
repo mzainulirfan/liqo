@@ -73,11 +73,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="mentor" class="col-form-label">Mentor:</label>
-                        <select name="mentor_id" id="mentor" class="form-control">
-                            <?php foreach ($dataMentor as $mentor) : ?>
-                                <option value="<?= $mentor['user_id']; ?>"><?= $mentor['user_fullname']; ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <?php if (!empty($dataMentor)) : ?>
+                            <select name="mentor_id" id="mentor" class="form-control">
+                                <?php foreach ($dataMentor as $mentor) : ?>
+                                    <option value="<?= $mentor['user_id']; ?>"><?= $mentor['user_fullname']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        <?php else : ?>
+                            <span>Ups...Data mentor not found</span>
+                        <?php endif; ?>
                     </div>
                     <button type="submit" class="btn btn-primary float-end mt-2">Save group</button>
                 </form>
@@ -86,30 +90,32 @@
     </div>
 </div>
 
-<!-- Modal Edit group -->
-<div class="modal fade" id="editgroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editroleLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit role</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <form method="post" action="<?= base_url(); ?>groups/update/">
-                    <?= csrf_field(); ?>
-                    <input type="hidden" name="id" id="id" value="<?= $group['group_id']; ?>">
-                    <input type="hidden" name="slug" id="slug" value="<?= $group['slug']; ?>">
-                    <div class="mb-3">
-                        <label for="name" class="col-form-label">Name:</label>
-                        <input type="text" class="form-control <?= (session()->has('validation') && ($validation = session('validation'))->hasError('name')) ? 'is-invalid' : '' ?>" name="name" id="name" value="<?= old('name'); ?>">
-                        <div class="invalid-feedback">
-                            <?= session()->has('validation') && session('validation')->hasError('name') ? session('validation')->getError('name') : '' ?>
+<?php if (!empty($groupData)) : ?>
+    <!-- Modal Edit group -->
+    <div class="modal fade" id="editgroup" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="editroleLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit role</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" action="<?= base_url(); ?>groups/update/">
+                        <?= csrf_field(); ?>
+                        <input type="hidden" name="id" id="id" value="<?= $group['group_id']; ?>">
+                        <input type="hidden" name="slug" id="slug" value="<?= $group['slug']; ?>">
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control <?= (session()->has('validation') && ($validation = session('validation'))->hasError('name')) ? 'is-invalid' : '' ?>" name="name" id="name" value="<?= old('name'); ?>">
+                            <div class="invalid-feedback">
+                                <?= session()->has('validation') && session('validation')->hasError('name') ? session('validation')->getError('name') : '' ?>
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary float-end mt-2">Update group</button>
-                </form>
+                        <button type="submit" class="btn btn-primary float-end mt-2">Update group</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+<?php endif; ?>
 <?= $this->endSection(); ?>

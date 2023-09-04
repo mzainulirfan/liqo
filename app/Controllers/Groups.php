@@ -66,7 +66,6 @@ class Groups extends BaseController
         $memberGroupData = $this->memberModel->where('group_id', $groupId)->join('users', 'users.user_id=group_members.user_id')->findAll();
         $scheduleData = $this->scheduleModel->where('group_id', $groupId)->findAll();
         $userData = $this->userRoleModel->where('role_id', 2)->join('users', 'users.user_id=user_roles.user_id')->findAll();
-        // dd($scheduleData);
         $data = [
             'title' => 'Detail group',
             'groupData' => $groupData,
